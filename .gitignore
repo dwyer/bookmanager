@@ -1,0 +1,7 @@
+*.csv
+*.db
+.DS_Store
+.mypy_cache/
+Backup/
+QUERIES
+__pycache__/
