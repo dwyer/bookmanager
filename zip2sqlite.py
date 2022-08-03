@@ -25,7 +25,8 @@ def dbase_table_to_sqlite_commands(fp, name):
         elif field.type in 'L':
             sql_type = 'boolean'
         elif field.type in 'M':
-            sql_type = 'integer not null'
+            # sql_type = 'integer not null'
+            sql_type = 'integer'
         elif field.type in 'N':
             if field.num_decimals:
                 sql_type = 'decimal(%d,%d)' % (field.length-1,
