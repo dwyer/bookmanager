@@ -1,5 +1,6 @@
 import datetime
 import decimal
+import sys
 
 # http://www.dbfree.org/webdocs/1-documentation/b-dbf_header_specifications.htm
 # http://www.dbfree.org/webdocs/start.msp?XY=43916643&VK=c:\\dbw\\srv\\s1\\web\\webdocs\\1-Documentation&VM=*.*
@@ -156,7 +157,11 @@ class FileWrapper(object):
         data = self.read_str(field.length).lstrip(' ')
         if field.num_decimals:
             return decimal.Decimal(data) if data else None
-        return int(data) if data else None
+        try:
+            return int(data) if data else None
+        except ValueError as e:
+            print(e, file=sys.stderr)
+            return None
 
     def write_numeric_field(self, field, value):
         if value is None:
